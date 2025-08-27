@@ -1,0 +1,113 @@
+def mostrar_resultado(valor):
+    linha()
+    print("Valor no momento:", valor)
+    linha()
+
+def linha():
+    lin = "_"*120
+    print(lin)
+
+
+def não0(re, Numero):
+    while True:
+        OP2 = input("Digite uma operação diferente de divisão por zero [MU, SO, SU,]: ").lower()
+
+        if OP2 == "mu":
+            return re * Numero
+        elif OP2 == "so":
+            return re + Numero
+        elif OP2 == "su":
+            return re - Numero
+        else:
+            print("Operação inválida! Tente novamente.")
+
+def conta(*num):
+    OP = "text"
+    re=0
+    contar = len(num) - 1
+    contador = 0
+    resto = 0
+    for Numero in num:
+        contador= contador+1
+        if contador != 1:
+            linha()
+            print("Proximo numero: ",Numero)
+            print("Faltam: ", contar, "Numeros antes do resultado final")
+            contar -= 1
+
+            linha()
+
+
+        if re == 0 and contador ==1:
+
+            re = Numero
+        else:
+            while True:
+                mostrar_resultado(re)
+                linha()
+                OP = input("Digite a operação desejada: ")
+                linha()
+                if OP == "mu":
+                    re = re * Numero
+                    break
+
+
+
+                elif OP == "di":
+                    if Numero == 0:
+                        linha()
+                        print("Não é possivel dividir por zero")
+                        linha()
+                        print("Escolha outra operação")
+                        linha()
+                        re = não0(re, Numero)
+                        break
+                    else:
+                        resto = re % Numero
+                        re = re // Numero
+                        break
+
+
+
+                elif OP == "so":
+                    re = re + Numero
+                    break
+
+                elif OP == "su":
+                    re = re - Numero
+                    break
+
+                elif OP == "dr":
+                    if Numero == 0:
+                        linha()
+                        print("Não é possivel dividir por zero")
+                        linha()
+                        print("Escolha outra operação")
+                        linha()
+                        re = não0(re, Numero)
+                        break
+
+                    else:
+                        re = re / Numero
+                        break
+                else:
+                    print("Escolha uma operação válida.")
+
+
+
+
+    if resto != 0:
+        linha()
+        print("Resto da divisão", resto)
+        linha()
+    return re
+
+
+entrada = input("Digite os numeros separados por espaço: ")
+valores = [int(x) for x in entrada.split()]
+
+print("Bem vindo a calculadora, agora digite a operação desejada")
+print("Sendo [MU],[DI],[DR],[SO],[SU]")
+linha()
+print("Resultado: ",conta(*valores))
+linha()
